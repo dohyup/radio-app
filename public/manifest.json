@@ -1,6 +1,14 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "라디오 방송 앱",
+  "short_name": "라디오",
+  "description": "실시간 라디오 방송과 채팅을 즐기세요",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#6c63ff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ko",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +18,35 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "maskable any"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable any"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "shortcuts": [
+    {
+      "name": "라디오 재생",
+      "url": "/?action=play",
+      "description": "바로 라디오 재생 시작"
+    },
+    {
+      "name": "채팅방",
+      "url": "/?action=chat",
+      "description": "실시간 채팅방 입장"
+    }
+  ],
+  "categories": ["music", "entertainment", "social"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
 }

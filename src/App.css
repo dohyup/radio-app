@@ -1,38 +1,856 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: white;
+  overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.screen {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* 🔐 로그인 화면 */
+.login-screen {
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 2rem;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  padding: 3rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 400px;
+  width: 100%;
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-section {
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #6c63ff 0%, #5a52ff 100%);
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: white;
+  box-shadow: 0 8px 32px rgba(108, 99, 255, 0.3);
+  animation: logoFloat 0.8s ease-out;
+}
+
+@keyframes logoFloat {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-section h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #6c63ff 0%, #5a52ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-section p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-input {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6c63ff;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+}
+
+.login-button {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #6c63ff 0%, #5a52ff 100%);
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.6);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+.demo-info {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+/* 📱 헤더 */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-left h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.status-dot.live {
+  background: #ff4444;
+  box-shadow: 0 0 10px #ff4444;
+}
+
+.status-dot.offline {
+  background: #666;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.header-right {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon-button {
+  position: relative;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4444;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  min-width: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.user-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+/* 🎵 메인 플레이어 */
+.player-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.player-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  padding: 3rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.album-art {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #6c63ff 0%, #5a52ff 50%, #4c4cff 100%);
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.album-art::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+}
+
+.track-info {
+  margin-bottom: 2rem;
+}
+
+.track-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.track-info p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+}
+
+.player-controls {
+  margin-bottom: 2rem;
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #6c63ff 0%, #5a52ff 100%);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+}
+
+.play-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(108, 99, 255, 0.6);
+}
+
+.play-button:active {
+  transform: scale(0.95);
+}
+
+.play-button.playing {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.play-button.playing:hover {
+  box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+}
+
+.volume-control button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.volume-control button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.volume-slider {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6c63ff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  background: #5a52ff;
+  transform: scale(1.1);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6c63ff;
+  cursor: pointer;
+  border: none;
+}
+
+.volume-value {
+  min-width: 3rem;
+  text-align: right;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+/* 💬 채팅 화면 */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  scroll-behavior: smooth;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: messageSlide 0.3s ease-out;
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-message {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.3);
+  box-shadow: 0 2px 10px rgba(255, 193, 7, 0.1);
+}
+
+.user-message {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.message-user {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+}
+
+.admin-badge {
+  background: #ffc107;
+  color: #000;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.message-time {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  margin-left: auto;
+}
+
+.message-text {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+.chat-input {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  bottom: 0;
+}
+
+.message-input {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.message-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: #6c63ff;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+}
+
+.send-button {
+  padding: 1rem;
+  background: #6c63ff;
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+}
+
+.send-button:hover {
+  background: #5a52ff;
+  transform: translateY(-2px);
+}
+
+.send-button:active {
+  transform: translateY(0);
+}
+
+/* ⚙️ 설정 화면 */
+.settings-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.settings-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 -1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.settings-item span {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.settings-item span.premium {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+.settings-item span.basic {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.settings-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #6c63ff;
+  cursor: pointer;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #ff4444 0%, #cc3333 100%);
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+}
+
+.logout-button:hover {
+  background: linear-gradient(135deg, #ff3333 0%, #bb2222 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
+
+/* 📱 반응형 디자인 */
+@media (max-width: 768px) {
+  .login-container,
+  .player-card {
+    margin: 1rem;
+    padding: 2rem 1.5rem;
+    border-radius: 1.5rem;
+  }
+  
+  .app-header {
+    padding: 1rem;
+  }
+  
+  .header-left h1 {
+    font-size: 1.2rem;
+  }
+  
+  .album-art {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .play-button {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .settings-content {
+    padding: 1rem;
+  }
+  
+  .status-info {
+    font-size: 0.8rem;
+  }
+  
+  .track-info h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container,
+  .player-card {
+    padding: 1.5rem 1rem;
+    margin: 0.5rem;
+  }
+  
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-section h1 {
+    font-size: 1.5rem;
+  }
+  
+  .album-art {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .track-info h2 {
+    font-size: 1.3rem;
+  }
+  
+  .chat-input {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+  
+  .volume-control {
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .settings-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .settings-item span:last-child {
+    align-self: flex-end;
+  }
+  
+  .message {
+    padding: 0.75rem;
+  }
+  
+  .form-input,
+  .message-input {
+    padding: 0.75rem;
+  }
+}
+
+/* 기타 효과들 */
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    rgba(108, 99, 255, 0.1) 0%, 
+    rgba(90, 82, 255, 0.05) 50%, 
+    rgba(108, 99, 255, 0.1) 100%);
+  opacity: 0;
+  animation: headerGlow 4s ease-in-out infinite;
+}
+
+@keyframes headerGlow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #6c63ff 0%, #5a52ff 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a52ff 0%, #4c46ff 100%);
+}
+
+::selection {
+  background: rgba(108, 99, 255, 0.3);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #6c63ff;
+  outline-offset: 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
